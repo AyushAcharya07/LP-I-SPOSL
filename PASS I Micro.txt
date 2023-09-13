@@ -1,0 +1,88 @@
+class pass1macro:
+def __init__(self,filename):
+self.filename = filename
+self.lines = []
+with open(filename, "r") as input_file:
+for line in input_file:
+self.lines.append(line.rstrip().split(" "))
+def pass1(self):
+self.mdt = []
+self.mnt = {}
+self.pntab = {}
+self.kptab = {}
+self.kptr = 100
+self.mdtptr = 0
+isInMacro = False
+i = 0
+macro_name = ""
+while i < len(self.lines):
+if self.lines[i][0] == "MACRO" and not isInMacro:
+isInMacro = True
+i += 1
+macro_name = self.lines[i][0]
+params = self.lines[i][1].split(",")
+startptr = self.kptr
+self.pntab[macro_name] = {}
+kp = 0
+for param in params:
+if "=" in param:
+kp += 1
+key = param.split("=")[0]
+if len(param.split("=")) == 2:
+val = param.split("=")[1]
+else:
+val = ""
+self.kptab[self.kptr] = (key, val)
+self.kptr += 1
+self.pntab[macro_name][len(self.pntab[macro_name]) + 1] = param.split("=")[0]
+self.mnt[macro_name] = (len(self.pntab[macro_name])-kp, kp, self.mdtptr, startptr)
+elif self.lines[i][0] == "MEND" and isInMacro:
+macro_name = ""
+isInMacro = False
+self.mdt.append(self.lines[i][0])
+self.mdtptr += 1elif isInMacro:
+inst = " ".join(self.lines[i])
+for key in self.pntab[macro_name]:
+inst = inst.replace(self.pntab[macro_name][key], f"(P,{key})")
+self.mdt.append(inst)
+self.mdtptr += 1
+i += 1
+print("Macro Name Table:")
+# print("Name PP KP MDTP KPDTP")
+# for key,val in self.mnt.items():
+# print(f"{key} {val[0]} {val[1]} {val[2] }")
+print(self.mnt)
+print("Keyword Parameter Name Table:")
+print(self.kptab)
+print("Parameter Name Table:")
+print(self.pntab)
+print("Macro Definition Table:")
+print(self.mdt)
+obj = pass1macro("prog1.asm")
+obj.pass1()
+Testcase:
+MACRO
+ONE &O,&N,&E=AREG
+MOVER &E,&O
+ADD &E,&N
+MOVEM &E,&O
+MEND
+MACRO
+TWO &T,&W,&O=DREG
+MOVER &O,&T
+ADD &O,&W
+MOVEM &O,&T
+MEND
+START
+READ O
+READ T
+ONE O,9
+TWO T,7
+STOP
+O DS 1
+T DS 1
+END
+
+
+
+Output:
