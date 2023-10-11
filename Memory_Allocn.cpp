@@ -45,16 +45,17 @@ int main()
     int allocation_block[m];
     string allocation_status[m];
     cout<<endl;
-    cout<<"\n\t\tMEMORY ALLOCATION ALGO"<<endl;
-    cout<<"\n1.First_Fit\n2.Best_Fit\n3.Worst_Fit\n4.Next_Fit"<<endl;
-    cout<<"\nEnter your choice for using Memory Allocation : "<<endl;
-    cin>>ch;
     
     do
     {
+    	cout<<"\n\t\tMEMORY ALLOCATION ALGORITHMS"<<endl;
+    	cout<<"\n1.First_Fit\n2.Best_Fit\n3.Worst_Fit\n4.Next_Fit"<<endl;
+    	cout<<"\nEnter your choice for using Memory Allocation : "<<endl;
+    	cin>>ch;
     	switch(ch)
     	{
     		case 1:
+    			memset(allocated, false, sizeof(allocated));
 				for (int i = 0; i < m; i++)
     			{
 					bool allocated_flag = false;
@@ -98,6 +99,7 @@ int main()
 				
 				
 			case 2:
+				memset(allocated, false, sizeof(allocated));
 				for (int i=0;i<m;i++)
     			{
 					int best_blk=-1;
@@ -145,6 +147,7 @@ int main()
 				break;
 				
 			case 3:
+				memset(allocated, false, sizeof(allocated));
 				for (int i=0;i<m;i++)
     			{
 					int best_blk=-1;
@@ -192,6 +195,7 @@ int main()
 				break;
 				
 			case 4:
+				memset(allocated, false, sizeof(allocated));
 				for (int i = 0; i < m; i++)
     			{
 					bool allocated_flag = false;
