@@ -23,10 +23,11 @@ int main()
         cout << "Memory Block " << i + 1 << " is : " << blk_size[i] << endl;
     }
 
-    cout << "\nEnter the no. of processes: " << endl;
+    cout << "\Enter the no. of processes: " << endl;
     cin >> m;
     int process_size[m];
     bool allocated[n];
+    memset(allocated, false, sizeof(allocated));
 
     cout << "Enter the process sizes: " << endl;
     for (int i = 0; i < m; i++)
@@ -37,19 +38,18 @@ int main()
     cout << "\nThe processes with size are: " << endl;
     for (int i = 0; i < m; i++)
     {
-        cout << "Process " << i + 1 << " : Size is : " << process_size[i] << endl;
+        cout << "Process " << i + 1 << ": Size is : " << process_size[i] << endl;
     }
-
-    memset(allocated, false, sizeof(allocated));
 
     int allocation_block[m];
     string allocation_status[m];
 
+    int j = 0;  // Initialize memory block index
     for (int i = 0; i < m; i++)
     {
         bool allocated_flag = false;
 
-        for (int j = 0; j < n; j++)
+        while (j < n)
         {
             if (!allocated[j] && blk_size[j] >= process_size[i])
             {
@@ -58,32 +58,30 @@ int main()
                 allocated[j] = true;
                 allocated_flag = true;
                 break;
-                j++;
             }
+            j = (j + 1) % n;  // Move to the next block in a circular manner
         }
 
-        
         if (!allocated_flag)
         {
-            allocation_block[i] = -1; 
+            allocation_block[i] = -1;
             allocation_status[i] = "Not Allocated";
         }
     }
 
-    cout << "\nProcess\t\tProcess Size\t\tMemory Block\t\tStatus" << endl;
-    cout<<endl;
+    cout << "\nProcess\tProcess Size\tMemory Block\tStatus" << endl;
     for (int i = 0; i < m; i++)
     {
-        cout << "Process " << i + 1 << "\t\t" << process_size[i] << "\t\t";
+        cout << "Process " << i + 1 << "\t" << process_size[i] << "\t";
         if (allocation_block[i] != -1)
         {
-            cout <<"\t"<<allocation_block[i] << "\t\t";
+            cout << allocation_block[i] << "\t";
         }
         else
         {
-            cout << "----\t\t";
+            cout << "----\t";
         }
-        cout<<allocation_status[i] << endl;
+        cout << allocation_status[i] << endl;
     }
 
     return 0;
