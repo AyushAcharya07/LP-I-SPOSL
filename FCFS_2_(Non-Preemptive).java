@@ -13,6 +13,8 @@ class schd
     int C_time[];
     int T_time[];
     int W_time[];
+    int totalWtime;
+    int totalTtime;
 
     void entry()
     {
@@ -101,6 +103,7 @@ class schd
         for (int i=0;i<n;i++)
         {
             T_time[i]=C_time[i]-c[i].A_time;
+            totalTtime+=T_time[i];
         }
     }
 
@@ -117,6 +120,7 @@ class schd
         for (int i=0;i<n;i++)
         {
             W_time[i]=T_time[i]-c[i].B_time;
+            totalWtime+=W_time[i];
         }
     }
 
@@ -127,24 +131,6 @@ class schd
             System.out.println(W_time[i]);
         }
     }
-
-//    void gantt_cht()
-//    {
-//        for (int i=0;i<n;i++)
-//        {
-//            System.out.print(c[i].Process+"\t\t\t");
-////            System.out.println();
-//        }
-//        System.out.println(" ");
-////        System.out.println("0\t");
-//        for (int i=0;i<C_time.length;i++)
-//        {
-//            if (i==0)
-//                System.out.println("0\t"+C_time[i]+"\t\t\t");
-//            else
-//                System.out.println("\t\t\t"+C_time[i]+"\t\t\t");
-//        }
-//    }
 
     void gantt_cht() {
         for (int i = 0; i < n; i++) {
@@ -161,6 +147,17 @@ class schd
         System.out.println();
     }
 
+    void avg_wtime()
+    {
+        double avgWait=(double) totalWtime/n;
+        System.out.println("Average Waiting time : "+avgWait+" ms");
+    }
+    void avg_Ttime()
+    {
+        double avgTA=(double) totalTtime/n;
+        System.out.println("Average Waiting time : "+avgTA+" ms");
+    }
+
 }
 
 public class fcfs2 {
@@ -170,7 +167,7 @@ public class fcfs2 {
         while(ans==1)
         {
             System.out.println("********************MENU********************");
-            System.out.println("1.Take the Entry for Process Name,Arrival & Burst Time\n2.Sort the Processes\t\t\t\t\t3.Display the Processes\n4.Compute the Completion Time\t\t\t5.Display the Completion Time\n6.Compute the Turn-Around Time\t\t\t7.Display the Turn-Around Time\n8.Compute the Waiting Time\t\t\t\t9.Display the Waiting Time\n10.Display the Gantt Chart\n11.Exit");
+            System.out.println("1.Take the Entry for Process Name,Arrival & Burst Time\n2.Sort the Processes\t\t\t\t\t3.Display the Processes\n4.Compute the Completion Time\t\t\t5.Display the Completion Time\n6.Compute the Turn-Around Time\t\t\t7.Display the Turn-Around Time\n8.Compute the Waiting Time\t\t\t\t9.Display the Waiting Time\n10.Display the Gantt Chart\t\t\t\t11.Average Waiting Time\n12.Average Turnaround Time\t\t\t\t13.Exit");
             System.out.println("Enter your choice : ");
             ch=obj.sc.nextInt();
             switch(ch)
@@ -224,6 +221,14 @@ public class fcfs2 {
                     break;
 
                 case 11:
+                    obj.avg_wtime();
+                    break;
+
+                case 12:
+                    obj.avg_Ttime();
+                    break;
+
+                case 13:
                     System.out.println("Terminating successfully!!");
                     ans=2;
                     break;
