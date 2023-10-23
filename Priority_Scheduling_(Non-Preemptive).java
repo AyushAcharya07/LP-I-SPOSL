@@ -59,6 +59,8 @@ Enter the Priority for Process P7 :
 10
 
 */
+
+
 import java.util.*;
 
 class input {
@@ -74,6 +76,8 @@ public class priority {
         int C_time[];
         int T_time[];
         int W_time[];
+        int totalTurnaroundTime = 0;
+        int totalWaitingTime = 0;
 
         System.out.println("Enter the no. of Processes : ");
         n = sc.nextInt();
@@ -152,11 +156,26 @@ public class priority {
 
         System.out.println(ganttChart.toString());
         System.out.println(timeLine.toString());
-
-        System.out.println("\nPID\tArrival Time\tBurst Time\tPriority\tCompletion Time\tTurnaround Time\tWaiting Time");
-        for (int i = 0; i < n; i++) {
-            System.out.println(obj[i].Process_id + "\t\t" + obj[i].A_time + "\t\t\t" + obj[i].B_time + "\t\t\t" +
-                    obj[i].Prior + "\t\t\t" + C_time[i] + "\t\t\t" + T_time[i] + "\t\t\t" + W_time[i]);
+        System.out.println(" ");
+        System.out.println("-------------------------------------------------------------------------------------------------------");
+        System.out.println("PID\t\tArrival Time\t\tBurst Time\t\tPriority\t\tCompletion Time\t\tTurnaround Time\t\tWaiting Time");
+        System.out.println("-------------------------------------------------------------------------------------------------------");
+        for (int i = 0; i < n; i++)
+        {
+            System.out.println(obj[i].Process_id + "\t\t\t" + obj[i].A_time + "\t\t\t\t" + obj[i].B_time + "\t\t\t\t" + obj[i].Prior + "\t\t\t\t\t" + C_time[i] + "\t\t\t\t\t" + T_time[i] + "\t\t\t\t\t" + W_time[i]);
+            totalTurnaroundTime += T_time[i];
+            totalWaitingTime += W_time[i];
         }
+
+        System.out.println(" ");
+        System.out.println("-------------------------------------------------------------------------------------------------------");
+
+
+        double avgTurnaroundTime = (double) totalTurnaroundTime / n;
+        double avgWaitingTime = (double) totalWaitingTime / n;
+
+        System.out.println("Average Turnaround Time: " + avgTurnaroundTime+" ms");
+        System.out.println("Average Waiting Time: " + avgWaitingTime+" ms");
     }
 }
+
