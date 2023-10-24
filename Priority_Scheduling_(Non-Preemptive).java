@@ -68,7 +68,7 @@ class input {
     int A_time, B_time, Prior;
 }
 
-public class priority {
+public class Priority_Non_Preemptive_Scheduling {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n;
@@ -158,14 +158,19 @@ public class priority {
         System.out.println(timeLine.toString());
         System.out.println(" ");
         System.out.println("-------------------------------------------------------------------------------------------------------");
-        System.out.println("PID\t\tArrival Time\t\tBurst Time\t\tPriority\t\tCompletion Time\t\tTurnaround Time\t\tWaiting Time");
         System.out.println("-------------------------------------------------------------------------------------------------------");
-        for (int i = 0; i < n; i++)
-        {
-            System.out.println(obj[i].Process_id + "\t\t\t" + obj[i].A_time + "\t\t\t\t" + obj[i].B_time + "\t\t\t\t" + obj[i].Prior + "\t\t\t\t\t" + C_time[i] + "\t\t\t\t\t" + T_time[i] + "\t\t\t\t\t" + W_time[i]);
+        System.out.println("PID\tArrival Time\tBurst Time\tPriority\tCompletion Time\tTurnaround Time\tWaiting Time");
+        System.out.println("-------------------------------------------------------------------------------------------------------");
+
+        for (int i = 0; i < n; i++) {
+            String output = String.format("%s\t\t%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t%d", obj[i].Process_id, obj[i].A_time, obj[i].B_time, obj[i].Prior, C_time[i], T_time[i], W_time[i]);
+            System.out.println(output);
             totalTurnaroundTime += T_time[i];
             totalWaitingTime += W_time[i];
         }
+
+System.out.println("-------------------------------------------------------------------------------------------------------");
+
 
         System.out.println(" ");
         System.out.println("-------------------------------------------------------------------------------------------------------");
