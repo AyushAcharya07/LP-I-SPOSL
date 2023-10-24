@@ -48,7 +48,7 @@ class Entry1 {
 
 }
 
-public class sjf_new {
+public class SJF_Preemptive_Scheduling {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n;
