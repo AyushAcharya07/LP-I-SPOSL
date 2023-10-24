@@ -7,7 +7,7 @@ class Process {
     int finish, completionTime;
 }
 
-public class rr2 {
+public class Round_Robin_Preemptive_Scheduling {
 
     public static void main(String[] args) {
         int n, sumBurst = 0, quantum, time;
@@ -77,12 +77,12 @@ public class rr2 {
                 timeline.append(time).append("\t\t");
             }
         }
-        System.out.println("\n---------------------------------------------------------------------------------------");
-        System.out.println("Processor\tArrival time\tBurst time\tCompletion Time \tTurnaround time \tWaiting time");
-        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("\n----------------------------------------------------------------------------------------------------------");
+        System.out.println("Process\tArrival time\tBurst time\tCompletion Time \tTurnaround time \tWaiting time");
+        System.out.println("------------------------------------------------------------------------------------------------------------");
 
         for (int i = 0; i < n; i++) {
-            System.out.println("P" + p[i].processID + "\t\t\t\t" + p[i].arrival + "ms\t\t\t\t" + p[i].burst + "ms\t\t\t\t" + p[i].completionTime + "ms\t\t\t\t" + p[i].turnAround + "ms\t\t\t\t" + p[i].waiting + "ms");
+            System.out.println("P" + p[i].processID + "\t\t" + p[i].arrival + "\t\t" + p[i].burst + "\t\t" + p[i].completionTime + "\t\t" + p[i].turnAround + "\t\t\t" + p[i].waiting);
             avgWAT += p[i].waiting;
             avgTAT += p[i].turnAround;
         }
@@ -92,3 +92,27 @@ public class rr2 {
         System.out.println(timeline.toString().trim());
     }
 }
+
+/*
+ Enter Number of Process: 6
+Enter the arrival time for P1: 0
+Enter the burst time for P1: 5
+
+Enter the arrival time for P2: 1
+Enter the burst time for P2: 6
+
+Enter the arrival time for P3: 2
+Enter the burst time for P3: 3
+
+Enter the arrival time for P4: 3
+Enter the burst time for P4: 1
+
+Enter the arrival time for P5: 4
+Enter the burst time for P5: 5
+
+Enter the arrival time for P6: 6
+Enter the burst time for P6: 4
+
+
+Enter time quantum: 4
+ */
